@@ -25,15 +25,15 @@ class AddressCest
         $orderAddress = $I->have(OrderAddress::class);
 
         $cartAddresses = CartAddress::all();
-        $I->assertCount(1, $cartAddresses);
+        $I->assertCount(8, $cartAddresses);
         $I->assertEquals($cartAddress->id, $cartAddresses[0]->id);
 
         $customerAddresses = CustomerAddress::all();
-        $I->assertCount(1, $customerAddresses);
+        $I->assertCount(8, $customerAddresses);
         $I->assertEquals($customerAddress->id, $customerAddresses[0]->id);
 
         $orderAddresses = OrderAddress::all();
-        $I->assertCount(1, $orderAddresses);
+        $I->assertCount(8, $orderAddresses);
         $I->assertEquals($orderAddress->id, $orderAddresses[0]->id);
     }
 

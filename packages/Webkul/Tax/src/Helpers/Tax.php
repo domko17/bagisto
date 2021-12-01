@@ -114,18 +114,18 @@ class Tax
      * @param  object    $address
      * @param  object    $taxCategory
      * @param  \Closure  $operation
-     * @return void
+     * @return bool
      */
-    public static function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation)
+    public static function isTaxApplicableInCurrentAddress($taxCategory, $address, $operation) : bool
     {
         $taxRates = $taxCategory->tax_rates()->where([
             'country' => $address->country,
         ])->orderBy('tax_rate', 'desc')->get();
 
+        $haveTaxRate = false;
+
         if ($taxRates->count()) {
             foreach ($taxRates as $rate) {
-                $haveTaxRate = false;
-
                 if ($rate->state != '' && $rate->state != $address->state) {
                     continue;
                 }
@@ -142,9 +142,10 @@ class Tax
 
                 if ($haveTaxRate) {
                     $operation($rate);
-                    break;
+                    return $haveTaxRate;
                 }
             }
         }
+        return $haveTaxRate;
     }
 }

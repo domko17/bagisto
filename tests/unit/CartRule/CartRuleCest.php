@@ -345,7 +345,7 @@ class CartRuleCest
     protected function getCartWithCouponScenarios(): array
     {
         return [
-            // [
+            //[
             //     'name'            => 'check cart coupon',
             //     'productSequence' => [
             //         self::PRODUCT_NOT_FREE,
@@ -745,24 +745,24 @@ class CartRuleCest
         $cartRule = $I->have(CartRule::class, $ruleConfig);
 
         DB::table('cart_rule_channels')
-          ->insert([
-              'cart_rule_id' => $cartRule->id,
-              'channel_id' => core()->getCurrentChannel()->id,
-          ]);
+            ->insert([
+                'cart_rule_id' => $cartRule->id,
+                'channel_id' => core()->getCurrentChannel()->id,
+            ]);
 
         $guestCustomerGroup = $I->grabRecord('customer_groups', ['code' => 'guest']);
         DB::table('cart_rule_customer_groups')
-          ->insert([
-              'cart_rule_id' => $cartRule->id,
-              'customer_group_id' => $guestCustomerGroup['id'],
-          ]);
+            ->insert([
+                'cart_rule_id' => $cartRule->id,
+                'customer_group_id' => $guestCustomerGroup['id'],
+            ]);
 
         $generalCustomerGroup = $I->grabRecord('customer_groups', ['code' => 'general']);
         DB::table('cart_rule_customer_groups')
-          ->insert([
-              'cart_rule_id' => $cartRule->id,
-              'customer_group_id' => $generalCustomerGroup['id'],
-          ]);
+            ->insert([
+                'cart_rule_id' => $cartRule->id,
+                'customer_group_id' => $generalCustomerGroup['id'],
+            ]);
 
         $coupon = $I->have(CartRuleCoupon::class, [
             'code' => 'AWESOME',
@@ -782,7 +782,7 @@ class CartRuleCest
 
         $cart = cart()->getCart();
         $cartItem = $cart->items()
-                         ->first();
+            ->first();
 
         $I->assertEquals('AWESOME', $cartItem['coupon_code']);
         $I->assertEquals(23.92, $cartItem['price']);
@@ -1065,24 +1065,24 @@ class CartRuleCest
         $cartRule = $I->have(CartRule::class, $ruleConfig);
 
         DB::table('cart_rule_channels')
-          ->insert([
-              'cart_rule_id' => $cartRule->id,
-              'channel_id' => core()->getCurrentChannel()->id,
-          ]);
+            ->insert([
+                'cart_rule_id' => $cartRule->id,
+                'channel_id' => core()->getCurrentChannel()->id,
+            ]);
 
         $guestCustomerGroup = $I->grabRecord('customer_groups', ['code' => 'guest']);
         DB::table('cart_rule_customer_groups')
-          ->insert([
-              'cart_rule_id' => $cartRule->id,
-              'customer_group_id' => $guestCustomerGroup['id'],
-          ]);
+            ->insert([
+                'cart_rule_id' => $cartRule->id,
+                'customer_group_id' => $guestCustomerGroup['id'],
+            ]);
 
         $generalCustomerGroup = $I->grabRecord('customer_groups', ['code' => 'general']);
         DB::table('cart_rule_customer_groups')
-          ->insert([
-              'cart_rule_id' => $cartRule->id,
-              'customer_group_id' => $generalCustomerGroup['id'],
-          ]);
+            ->insert([
+                'cart_rule_id' => $cartRule->id,
+                'customer_group_id' => $generalCustomerGroup['id'],
+            ]);
 
         $coupon = $I->have(CartRuleCoupon::class, [
             'cart_rule_id' => $cartRule->id,
