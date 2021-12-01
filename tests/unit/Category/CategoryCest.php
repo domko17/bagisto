@@ -177,4 +177,19 @@ class CategoryCest
         $I->assertEquals($pathCategories[2]->id, $this->childCategory->id);
         $I->assertEquals($pathCategories[3]->id, $this->grandChildCategory->id);
     }
+
+    //    new tests
+    public function testFindInTree(UnitTester $I)
+    {
+        $I->wantTo('searches for a category in the category tree');
+        $I->amGoingTo('test find in  tree');
+        $findInTrees = $this->grandChildCategory->findInTree();
+
+        $I->assertCount(4, $findInTrees);
+        $I->assertEquals($findInTrees[0]->id, $this->rootCategory->id);
+        $I->assertEquals($findInTrees[1]->id, $this->category->id);
+        $I->assertEquals($findInTrees[2]->id, $this->childCategory->id);
+        $I->assertEquals($findInTrees[3]->id, $this->grandChildCategory->id);
+    }
+
 }

@@ -135,4 +135,59 @@ class TaxCest
 
         $I->assertEquals($this->scenario['expectedTaxTotal'], $result);
     }
+
+    //    new tests
+    public function testGetDefaultAddress(UnitTester $I)
+    {
+        $result = $I->executeFunction(
+            \Webkul\Tax\Helpers\Tax::class,
+            'getDefaultAddress'
+        );
+
+        $isDefault = false;
+        foreach ($result as $address){
+            if ($address->id > 0){
+                $isDefault = true;
+            }
+        }
+
+        if ($isDefault) {
+            $I->assertEquals($this->scenario['expectedGetDefaultAddress'], $result);
+        }
+        else return false;
+    }
+
+    public function testIsTaxInclusive(UnitTester $I)
+    {
+        $result = $I->executeFunction(
+            \Webkul\Tax\Helpers\Tax::class,
+            'getTaxTotal',
+            [$this->scenario['cart'], false]
+        );
+
+        if ($result === true) {
+            $I->assertEquals($this->scenario['expectedTaxTotal'], $result);
+        }
+        else{
+            return;
+        }
+    }
+
+
+    public function testIsTaxApplicableInCurrentAddress(UnitTester $I)
+    {
+        $result = $I->executeFunction(
+            \Webkul\Tax\Helpers\Tax::class,
+            'getTaxTotal',
+            [$this->scenario['cart'], false]
+        );
+
+        if ($result === true) {
+            $I->assertEquals($this->scenario['expectedTaxTotal'], $result);
+        }
+        else{
+            return;
+        }
+    }
+
 }
